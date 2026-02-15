@@ -1,4 +1,4 @@
-# Beyond Accuracy: A Systematic Evaluation of Cognitive Biases and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
+# Beyond Accuracy: A Systematic Evaluation of Cognitive Biases Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
 
 [![DOI](https://img.shields.io/badge/DOI-pending-blue)](https://doi.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +7,7 @@
 
 This repository contains the statistical analysis code and LLM response data for the manuscript:
 
-> **Beyond Accuracy: A Systematic Evaluation of Cognitive Biases and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine**
+> **Beyond Accuracy: A Systematic Evaluation of Cognitive Biases Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine**
 >
 > Liu F†, Liu Z†, Fei X, He J, Xing J, Li J\*, Chan P\*
 >
@@ -21,7 +21,7 @@ We systematically evaluated six frontier LLMs—DeepSeek R1, Gemini 3 Pro, Claud
 
 - **Three-tier performance hierarchy** (F₅,₉₀₁ = 35.53, p < 0.001): Top tier (Gemini 3 Pro, DeepSeek R1), Middle tier (Claude Sonnet 4.5, GPT-5.1, Grok 4), Bottom tier (DeepSeek V3.1)
 - **Open-source parity**: DeepSeek R1 (EMM = 13.86) achieved statistical equivalence to Gemini 3 Pro (EMM = 13.93; Δ = 0.07, p = 0.999)
-- **Divergent safety profiles**: Overall failure rates ranged from 5.8% (Gemini 3 Pro) to 29.7% (DeepSeek V3.1), with a six-fold range in rare disease recognition failure rates
+- **Divergent safety profiles**: Overall failure rates ranged from 6.4% (Gemini 3 Pro) to 26.3% (DeepSeek V3.1), with a six-fold range in rare disease recognition failure rates
 
 ## Repository Structure
 
@@ -155,7 +155,7 @@ If you use this code or data, please cite:
 
 ```
 Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Beyond Accuracy: A Systematic 
-Evaluation of Cognitive Biases and Safety Profiles in Open-Source vs. Proprietary 
+Evaluation of Cognitive Biases Susceptibility and Safety Profiles in Open-Source vs. Proprietary 
 LLMs for Emergency Medicine. npj Digital Medicine (2026). [submitted]
 ```
 
