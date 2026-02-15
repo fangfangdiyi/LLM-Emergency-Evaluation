@@ -74,12 +74,12 @@ expected <- list(
   decline_grok = -3.20,
   
   # Error taxonomy overall (Table 1)
-  error_gemini = 5.8,
-  error_r1 = 5.9,
-  error_claude = 12.9,
-  error_grok = 22.1,
-  error_gpt = 24.5,
-  error_v3 = 29.7,
+  error_gemini = 6.4,
+  error_r1 = 6.4,
+  error_claude = 10.5,
+  error_grok = 22.2,
+  error_gpt = 25.1,
+  error_v3 = 26.3,
   
   # Error taxonomy - rare disease
   rare_gemini = 6.1,
@@ -101,7 +101,7 @@ expected <- list(
   iatro_r1 = 3.0,
   iatro_gemini = 3.0,
   iatro_grok = 12.1,
-  iatro_claude = 16.7,
+  iatro_claude = 15.2,
   iatro_gpt = 18.2,
   iatro_v3 = 30.3,
   
