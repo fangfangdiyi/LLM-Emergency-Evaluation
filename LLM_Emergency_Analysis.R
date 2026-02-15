@@ -1,5 +1,5 @@
 # ============================================================================
-# Beyond Accuracy: A Systematic Evaluation of Cognitive Biases and Safety 
+# Beyond Accuracy: A Systematic Evaluation of Cognitive Biases Susceptibility and Safety 
 # Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
 #
 # Statistical Analysis Script
@@ -626,7 +626,12 @@ print(error_iatrogenic %>% select(model_name, n_eval, n_fail, ci_text))
 error_all_combined <- bind_rows(error_rare, error_anchoring, error_iatrogenic)
 error_profile <- error_all_combined %>%
   group_by(model_name) %>%
-  summarise(Avg_Failure = round(mean(rate_pct), 1), .groups = "drop") %>%
+  summarise(
+    total_fail = sum(n_fail),
+    total_eval = sum(n_eval),
+    Avg_Failure = round(total_fail / total_eval * 100, 1),
+    .groups = "drop"
+  ) %>%
   arrange(Avg_Failure)
 
 cat("\nOverall Average Failure Rates:\n")
@@ -803,7 +808,7 @@ emm_ref <- emmeans(lmm_total, ~ model_name)
 emm_levels <- levels(as.data.frame(emm_ref)$model_name)
 ref_idx <- which(emm_levels == "DeepSeek R1")
 contrast_ref <- contrast(emm_ref, method = "trt.vs.ctrl", ref = ref_idx)
-contrast_df <- as.data.frame(summary(contrast_ref)) %>%
+contrast_df <- as.data.frame(summary(contrast_ref, infer = c(TRUE, TRUE)))%>%
   mutate(
     sig = case_when(p.value < 0.001 ~ "***", p.value < 0.01 ~ "**",
                     p.value < 0.05  ~ "*",   TRUE ~ ""),
@@ -815,8 +820,8 @@ p_figS7 <- ggplot(contrast_df, aes(x = estimate, y = reorder(model, estimate))) 
   geom_vline(xintercept = 0, linetype = "dashed", color = "red") +
   geom_vline(xintercept = c(-1.5, 1.5), linetype = "dotted", color = "blue", alpha = 0.5) +
   geom_point(size = 4) +
-  geom_errorbarh(aes(xmin = estimate - SE * 1.96, xmax = estimate + SE * 1.96), height = 0.2) +
-  geom_text(aes(label = sig, x = estimate + SE * 2 + 0.1), size = 5) +
+  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL), height = 0.2) +
+  geom_text(aes(label = sig, x = upper.CL + 0.1), size = 5) +
   labs(title = "Supplementary Figure S7. Pairwise Comparisons vs DeepSeek R1",
        subtitle = "Mean difference with 95% CI",
        x = "Difference in Total Score", y = "Model",
@@ -978,4 +983,5 @@ cat("  Fig S5:  output/FigS5_Effect_Size_Heatmap.png\n")
 cat("  Fig S6:  output/FigS6_Residuals.png\n")
 cat("  Fig S7:  output/FigS7_Forest_Plot.png\n")
 cat(strrep("=", 70), "\n")
+
 # END OF SCRIPT
