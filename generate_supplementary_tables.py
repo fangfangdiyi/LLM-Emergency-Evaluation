@@ -22,8 +22,8 @@ RATER1_FILE = "rater1_scores.xlsx"  # Rater 1 scoring file
 RATER2_FILE = "rater2_scores.xlsx"  # Rater 2 scoring file
 OUTPUT_FILE = "output/Supplementary_Table_S5.xlsx"
 
-# Case ID for the representative case example (Case 20 = dAVF)
-REPRESENTATIVE_CASE_ID = 20
+# Case ID for the representative case example (Case 24)
+REPRESENTATIVE_CASE_ID = 24
 
 # Column names in the scoring Excel files (modify if your files use different names)
 COL_CASE_ID = "病历号"  # Case ID column
