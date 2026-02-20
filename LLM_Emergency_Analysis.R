@@ -20,7 +20,7 @@ set.seed(42)
 required_packages <- c(
   "readxl", "tidyverse", "lme4", "lmerTest", "emmeans", "effectsize",
   "irr", "rstatix", "ggpubr", "corrplot", "performance",
-  "psych", "car", "writexl", "ordinal", "MuMIn"
+  "psych", "car", "writexl", "ordinal", "MuMIn", "multcomp"
 )
 
 for (pkg in required_packages) {
@@ -802,18 +802,19 @@ clmm_effects <- clmm_coef %>%
 cat("CLMM Cumulative Odds Ratios (vs DeepSeek R1):\n")
 print(clmm_effects %>% select(Model, OR, OR_lower, OR_upper, `Pr(>|z|)`, Sig))
 
-# --- Supplementary Figure S7: Forest Plot vs DeepSeek R1 ---
+# --- Supplementary Figure S7: Contrast Plot vs DeepSeek R1 ---
 emm_ref <- emmeans(lmm_total, ~ model_name)
 # Use emmeans object levels (not data levels, which may have been releveled for CLMM)
 emm_levels <- levels(as.data.frame(emm_ref)$model_name)
 ref_idx <- which(emm_levels == "DeepSeek R1")
 contrast_ref <- contrast(emm_ref, method = "trt.vs.ctrl", ref = ref_idx)
 contrast_df <- as.data.frame(summary(contrast_ref, infer = c(TRUE, TRUE)))%>%
-  mutate(
+mutate(
     sig = case_when(p.value < 0.001 ~ "***", p.value < 0.01 ~ "**",
                     p.value < 0.05  ~ "*",   TRUE ~ ""),
-    model = gsub(" - \\(DeepSeek R1\\)", "", contrast),
-    model = gsub(" - DeepSeek R1", "", model)
+    model = gsub("\\s*-\\s*\\(?DeepSeek R1\\)?", "", contrast),
+    model = gsub("[()]", "", model),
+    model = trimws(model)
   )
 
 p_figS7 <- ggplot(contrast_df, aes(x = estimate, y = reorder(model, estimate))) +
@@ -829,8 +830,8 @@ p_figS7 <- ggplot(contrast_df, aes(x = estimate, y = reorder(model, estimate))) 
   theme_pubr() +
   theme(plot.title = element_text(face = "bold"))
 
-ggsave("output/FigS7_Forest_Plot.png", p_figS7, width = 10, height = 6, dpi = 300)
-cat("  Saved: output/FigS7_Forest_Plot.png\n")
+ggsave("output/FigS7_Contrast_Plot.png", p_figS7, width = 10, height = 6, dpi = 300)
+cat("  Saved: output/FigS7_Contrast_Plot.png\n")
 
 # --- 12.3 Model x Round interaction (reported in Section 6) ---
 cat("\n12.3 Model x Round Interaction:\n")
@@ -981,7 +982,8 @@ cat("  Fig S3:  output/FigS3_Violin_Faceted.png\n")
 cat("  Fig S4:  output/FigS4_Dimension_Performance.png\n")
 cat("  Fig S5:  output/FigS5_Effect_Size_Heatmap.png\n")
 cat("  Fig S6:  output/FigS6_Residuals.png\n")
-cat("  Fig S7:  output/FigS7_Forest_Plot.png\n")
+cat("  Fig S7:  output/FigS7_Contrast_Plot.png\n")
 cat(strrep("=", 70), "\n")
 
 # END OF SCRIPT
+
