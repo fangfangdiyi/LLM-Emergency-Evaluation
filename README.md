@@ -44,7 +44,7 @@ We systematically evaluated six frontier LLMs—DeepSeek R1, Gemini 3 Pro, Claud
     ├── FigS4_Dimension_Performance.png # Supplementary Figure S4
     ├── FigS5_Effect_Size_Heatmap.png  # Supplementary Figure S5
     ├── FigS6_Residuals.png            # Supplementary Figure S6
-    └── FigS7_Forest_Plot.png          # Supplementary Figure S7
+    └── FigS7_Contrast_Plot.png          # Supplementary Figure S7
 ```
 
 ## Data Description
@@ -143,7 +143,7 @@ python generate_supplementary_tables.py
 | Figure 3 (difficulty stratification) | Section 9 | `Fig3_Performance_by_Difficulty.png` |
 | Table 1 (error taxonomy) | Section 10 | `Fig4_Error_Rates_by_Type.png` |
 | Figure 4 (error rates) | Section 10 | `Fig4_Error_Rates_by_Type.png` |
-| Sensitivity analyses | Section 12 | `FigS7_Forest_Plot.png` |
+| Sensitivity analyses | Section 12 | `FigS7_Contrast_Plot.png` |
 
 ## Ethics
 
