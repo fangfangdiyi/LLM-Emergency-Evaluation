@@ -1,11 +1,11 @@
 """
-Generate Supplementary Table S5: Individual Case Scores by Model
+Generate Supplementary Table S1: Individual Case Scores by Model
 
 This script reads the two rater scoring files and computes mean scores
 (2 raters x 3 queries = 6 ratings per cell) for each case/model/dimension.
 
 It also generates a representative case triplicate query summary for
-the manuscript's Supplementary Box S2.
+the manuscript's Supplementary Box S1.
 
 Dependencies: pandas, numpy, openpyxl
 """
@@ -20,7 +20,7 @@ from openpyxl.utils import get_column_letter
 # Modify these paths to point to your local rater scoring files
 RATER1_FILE = "rater1_scores.xlsx"  # Rater 1 scoring file
 RATER2_FILE = "rater2_scores.xlsx"  # Rater 2 scoring file
-OUTPUT_FILE = "output/Supplementary_Table_S5.xlsx"
+OUTPUT_FILE = "output/Supplementary_Table_S1.xlsx"
 
 # Case ID for the representative case example (Case 24)
 REPRESENTATIVE_CASE_ID = 24
@@ -45,7 +45,7 @@ DIMENSION_SHORT = {1: "Diag", 2: "Next", 3: "Treat"}
 
 # ==================== DATA READING ====================
 print("=" * 60)
-print("Generating Supplementary Table S5")
+print("Generating Supplementary Table S1")
 print("=" * 60)
 
 print("\n1. Reading rater scoring files...")
@@ -69,10 +69,10 @@ for col_name in [COL_CASE_ID, COL_ROUND]:
         print(f"\n   ERROR: Column '{col_name}' not found in Rater 2 file!")
         print(f"   Available columns: {list(r2_df.columns)}")
 
-# ==================== TABLE S5 COMPUTATION ====================
-print("\n2. Computing Table S5 (mean of 6 ratings per cell)...")
+# ==================== TABLE S1 COMPUTATION ====================
+print("\n2. Computing Table S1 (mean of 6 ratings per cell)...")
 
-table_s5_data = []
+table_s1_data = []
 nan_count = 0
 
 for case_id in range(1, 55):
@@ -112,10 +112,10 @@ for case_id in range(1, 55):
             avg = np.mean(scores_r1 + scores_r2)
             row_data[f"{model_name}_{DIMENSION_SHORT[dim]}"] = round(avg, 2)
 
-    table_s5_data.append(row_data)
+    table_s1_data.append(row_data)
 
-df_s5 = pd.DataFrame(table_s5_data)
-print(f"   Table S5: {df_s5.shape}")
+df_s1 = pd.DataFrame(table_s1_data)
+print(f"   Table S1: {df_s1.shape}")
 if nan_count > 0:
     print(f"   WARNING: {nan_count} cells have NaN (missing data)")
 else:
@@ -197,9 +197,9 @@ print("\n4. Writing to Excel...")
 
 wb = Workbook()
 
-# --- Sheet 1: Table S5 ---
+# --- Sheet 1: Table S1 ---
 ws1 = wb.active
-ws1.title = "Table S5"
+ws1.title = "Table S1"
 
 # Headers
 ws1["A1"] = "Case"
@@ -223,7 +223,7 @@ for model_name in MODEL_MAPPING.values():
     col += 3
 
 # Data rows
-for row_idx, case_data in enumerate(table_s5_data, start=3):
+for row_idx, case_data in enumerate(table_s1_data, start=3):
     ws1.cell(
         row=row_idx, column=1, value=case_data["Case"]
     ).alignment = Alignment(horizontal="center")
@@ -265,6 +265,6 @@ for ci, w in enumerate([20, 20, 20, 20, 12], 1):
 wb.save(OUTPUT_FILE)
 
 print(f"\nSaved: {OUTPUT_FILE}")
-print("  Sheet 1: Table S5 (54 cases x 6 models x 3 dimensions)")
+print("  Sheet 1: Table S1 (54 cases x 6 models x 3 dimensions)")
 print(f"  Sheet 2: Case {REPRESENTATIVE_CASE_ID} triplicate query scores")
 print("\nDone.")
