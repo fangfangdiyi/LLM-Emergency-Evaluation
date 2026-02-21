@@ -83,7 +83,7 @@ Required packages (automatically installed by the script if missing):
 ```r
 readxl, tidyverse, lme4, lmerTest, emmeans, effectsize,
 irr, rstatix, ggpubr, corrplot, performance,
-psych, car, writexl, ordinal, MuMIn
+psych, car, writexl, ordinal, MuMIn, multcomp
 ```
 
 ### Python (version 3.8+, for Supplementary Table S5 only)
@@ -110,7 +110,7 @@ The script will:
 - Generate all main and supplementary figures in `output/`
 - Export comprehensive results to `output/LLM_Emergency_All_Results.xlsx`
 
-### Generating Supplementary Table S5
+### Generating Supplementary Table S1
 
 ```bash
 python generate_supplementary_tables.py
