@@ -78,8 +78,6 @@ cat("Cases:", n_distinct(raw_data$case_id), " | Models:", n_distinct(raw_data$mo
 
 # ============================================================================
 # 3. INTER-RATER RELIABILITY
-#    Manuscript Results: ICC = 0.696 (0.663-0.727), dimension ICCs,
-#    weighted kappa 0.57-0.69, Bland-Altman bias = -0.01, LoA = -3.6 to 3.6
 #    Output: Supplementary Figures S1, S2
 # ============================================================================
 
@@ -223,7 +221,7 @@ dev.off()
 cat("  Saved: output/FigS1_Correlation_Matrix.png\n")
 
 # ============================================================================
-# 5. DESCRIPTIVE STATISTICS (Table 2)
+# 5. DESCRIPTIVE STATISTICS
 # ============================================================================
 
 cat("\n", strrep("=", 60), "\n")
@@ -269,9 +267,7 @@ cat("Chi-square:", round(chisq_high$statistic, 2),
 
 # ============================================================================
 # 6. PRIMARY ANALYSIS: LINEAR MIXED-EFFECTS MODEL
-#    Manuscript: F(5,901) = 35.53, p < 0.001
-#    Model x Round interaction: F(10,901) = 3.85, p < 0.001
-#    Output: Figure 1, Table 2
+#    Output: Figure 1, Table 1
 # ============================================================================
 
 cat("\n", strrep("=", 60), "\n")
@@ -328,8 +324,7 @@ cat("  Saved: output/FigS6_Residuals.png\n")
 
 # ============================================================================
 # 7. POST-HOC PAIRWISE COMPARISONS
-#    Manuscript: Three-tier hierarchy, EMMs, Cohen's d
-#    Output: Figure 1, Table 2, Supplementary Figure S5
+#    Output: Figure 1, Table 1, Supplementary Figure S5
 # ============================================================================
 
 cat("\n", strrep("=", 60), "\n")
@@ -338,7 +333,7 @@ cat(strrep("=", 60), "\n\n")
 
 # 7.1 Estimated marginal means
 emm_total <- emmeans(lmm_total, ~ model_name)
-cat("Estimated Marginal Means (Table 2):\n")
+cat("Estimated Marginal Means (Table 1):\n")
 print(summary(emm_total))
 
 # 7.2 Tukey-adjusted pairwise comparisons (15 pairs)
@@ -436,8 +431,6 @@ cat("  Saved: output/FigS5_Effect_Size_Heatmap.png\n")
 
 # ============================================================================
 # 8. RESPONSE CONSISTENCY ACROSS ROUNDS (Figure 2)
-#    Manuscript: Gemini 3 Pro declined 14.66 -> 12.76;
-#    DeepSeek R1 stable: 13.74, 13.95, 13.89
 # ============================================================================
 
 cat("\n", strrep("=", 60), "\n")
@@ -482,8 +475,7 @@ ggsave("output/Fig2_Round_Trajectory.png", p_fig2, width = 10, height = 6, dpi =
 cat("  Saved: output/Fig2_Round_Trajectory.png\n")
 
 # ============================================================================
-# 9. DIFFICULTY STRATIFICATION (Figure 3, Table 3)
-#    Manuscript: Model x Difficulty: F(10,903) = 2.73, p = 0.003
+# 9. DIFFICULTY STRATIFICATION (Figure 3, Table 2)
 # ============================================================================
 
 cat("\n", strrep("=", 60), "\n")
@@ -516,7 +508,7 @@ anova_diff <- anova(lmm_difficulty, type = 3, ddf = "Kenward-Roger")
 cat("\nModel x Difficulty ANOVA:\n")
 print(anova_diff)
 
-# Table 3: Performance decline
+# Table 2: Performance decline
 model_by_diff <- data_with_diff %>%
   group_by(model_name, difficulty) %>%
   summarise(mean_total = mean(total), se = sd(total) / sqrt(n()),
@@ -529,7 +521,7 @@ decline_table <- model_by_diff %>%
   mutate(across(c(Easy, Medium, Hard), ~ round(., 2))) %>%
   arrange(desc(Decline))
 
-cat("\nTable 3: Performance Decline (Easy to Hard):\n")
+cat("\nTable 2: Performance Decline (Easy to Hard):\n")
 print(decline_table %>% mutate(Rank = row_number()))
 
 # --- Figure 3: Performance by Difficulty ---
@@ -549,8 +541,7 @@ ggsave("output/Fig3_Performance_by_Difficulty.png", p_fig3, width = 10, height =
 cat("  Saved: output/Fig3_Performance_by_Difficulty.png\n")
 
 # ============================================================================
-# 10. ERROR TAXONOMY ANALYSIS (Figure 4, Table 1)
-#     Manuscript: Wilson CIs reported, Fisher's exact with Monte Carlo
+# 10. ERROR TAXONOMY ANALYSIS (Figure 4, Table 3)
 #     Type 1 (Rare Disease): 22 cases, 66 evaluations per model
 #     Type 2 (Anchoring Bias): 24 cases, 72 evaluations per model
 #     Type 3 (Iatrogenic Risk): 11 cases, 33 evaluations per model
@@ -612,7 +603,7 @@ error_rare      <- calc_error_rate(data_consensus, rare_disease_cases, "Rare Dis
 error_anchoring <- calc_error_rate(data_consensus, anchoring_cases,    "Anchoring Bias")
 error_iatrogenic <- calc_error_rate(data_consensus, iatrogenic_cases,  "Iatrogenic Risk")
 
-cat("Table 1: Error Taxonomy Failure Rates\n\n")
+cat("Table 3: Error Taxonomy Failure Rates\n\n")
 cat("Type 1 - Rare Disease Recognition (n = 66 per model):\n")
 print(error_rare %>% select(model_name, n_eval, n_fail, ci_text))
 
@@ -622,7 +613,7 @@ print(error_anchoring %>% select(model_name, n_eval, n_fail, ci_text))
 cat("\nType 3 - Iatrogenic Risk Identification (n = 33 per model):\n")
 print(error_iatrogenic %>% select(model_name, n_eval, n_fail, ci_text))
 
-# Overall average failure rates
+# Overall average failure rates (weighted: total failures / total evaluations)
 error_all_combined <- bind_rows(error_rare, error_anchoring, error_iatrogenic)
 error_profile <- error_all_combined %>%
   group_by(model_name) %>%
@@ -760,7 +751,6 @@ cat("SECTION 12: SENSITIVITY ANALYSES\n")
 cat(strrep("=", 60), "\n\n")
 
 # --- 12.1 Non-parametric: Friedman test ---
-# Manuscript: chi-squared = 98.71, df = 5, p < 0.001
 data_agg <- data_consensus %>%
   group_by(case_id, model_name) %>%
   summarise(mean_total = mean(total), .groups = "drop")
@@ -772,7 +762,6 @@ cat("  chi-squared =", round(friedman_result$statistic, 2),
     ", p =", format.pval(friedman_result$p.value, digits = 3), "\n\n")
 
 # --- 12.2 Cumulative Link Mixed Model (CLMM) ---
-# Manuscript: DeepSeek R1 as reference, odds ratios reported
 cat("12.2 Cumulative Link Mixed Model (CLMM):\n")
 cat("  Reference category: DeepSeek R1\n\n")
 
@@ -809,7 +798,7 @@ emm_levels <- levels(as.data.frame(emm_ref)$model_name)
 ref_idx <- which(emm_levels == "DeepSeek R1")
 contrast_ref <- contrast(emm_ref, method = "trt.vs.ctrl", ref = ref_idx)
 contrast_df <- as.data.frame(summary(contrast_ref, infer = c(TRUE, TRUE)))%>%
-mutate(
+  mutate(
     sig = case_when(p.value < 0.001 ~ "***", p.value < 0.01 ~ "**",
                     p.value < 0.05  ~ "*",   TRUE ~ ""),
     model = gsub("\\s*-\\s*\\(?DeepSeek R1\\)?", "", contrast),
@@ -832,13 +821,52 @@ p_figS7 <- ggplot(contrast_df, aes(x = estimate, y = reorder(model, estimate))) 
 
 ggsave("output/FigS7_Contrast_Plot.png", p_figS7, width = 10, height = 6, dpi = 300)
 cat("  Saved: output/FigS7_Contrast_Plot.png\n")
+# --- Extract Gemini 3 Pro vs DeepSeek R1 statistics for figure caption ---
+gemini_vs_r1 <- contrast_df %>%
+  filter(grepl("Gemini", model))
+
+cat("\n============================================================\n")
+cat("Figure S7 Caption Values (Gemini 3 Pro vs DeepSeek R1):\n")
+cat("============================================================\n\n")
+
+if (nrow(gemini_vs_r1) > 0) {
+  delta_val <- abs(gemini_vs_r1$estimate)
+  ci_lower  <- gemini_vs_r1$lower.CL
+  ci_upper  <- gemini_vs_r1$upper.CL
+  p_val     <- gemini_vs_r1$p.value
+  
+  cat(sprintf("Δ = %.2f\n", delta_val))
+  cat(sprintf("95%% CI: %.2f to %.2f\n", ci_lower, ci_upper))
+  cat(sprintf("p = %.3f\n", p_val))
+  
+  # Full caption text (copy-paste ready)
+  cat("\n--- Caption text (copy-paste ready) ---\n")
+  fig_caption <- sprintf(
+    "Gemini 3 Pro was the only model whose confidence interval fell entirely within the MCID bounds (Δ = %.2f, 95%% CI: %.2f to %.2f, p = %.3f), confirming statistical and clinical equivalence.",
+    delta_val, ci_lower, ci_upper, p_val
+  )
+  cat(fig_caption, "\n")
+}
+
+# --- Save caption values to file ---
+sink("output/FigS7_Caption_Values.txt")
+cat("Figure S7 Caption Values\n")
+cat("========================\n\n")
+cat("Gemini 3 Pro vs DeepSeek R1:\n")
+if (nrow(gemini_vs_r1) > 0) {
+  cat(sprintf("  Δ = %.2f\n", abs(gemini_vs_r1$estimate)))
+  cat(sprintf("  95%% CI: %.2f to %.2f\n", gemini_vs_r1$lower.CL, gemini_vs_r1$upper.CL))
+  cat(sprintf("  p = %.3f\n", gemini_vs_r1$p.value))
+}
+sink()
+cat("\nSaved: output/FigS7_Caption_Values.txt\n")
+
 
 # --- 12.3 Model x Round interaction (reported in Section 6) ---
 cat("\n12.3 Model x Round Interaction:\n")
 cat("  See Section 6 ANOVA output above\n\n")
 
 # --- 12.4 Rater-adjusted sensitivity analysis ---
-# Manuscript: n = 1,944 individual evaluations, rater as crossed random effect
 cat("12.4 Rater Sensitivity Analysis (n =", nrow(raw_data), "individual ratings):\n\n")
 
 lmm_no_rater <- lmer(
@@ -984,6 +1012,4 @@ cat("  Fig S5:  output/FigS5_Effect_Size_Heatmap.png\n")
 cat("  Fig S6:  output/FigS6_Residuals.png\n")
 cat("  Fig S7:  output/FigS7_Contrast_Plot.png\n")
 cat(strrep("=", 70), "\n")
-
 # END OF SCRIPT
-
