@@ -551,7 +551,7 @@ cat("\n", strrep("=", 60), "\n")
 cat("SECTION 10: ERROR TAXONOMY ANALYSIS\n")
 cat(strrep("=", 60), "\n\n")
 
-# Case assignments from Supplementary Table S4
+# Case assignments from Supplementary Table S5
 rare_disease_cases <- c(1, 3, 8, 9, 10, 12, 13, 14, 16, 19, 20, 23,
                         28, 29, 31, 33, 34, 36, 39, 43, 53, 54)  # n = 22
 anchoring_cases    <- c(2, 5, 6, 7, 11, 18, 21, 24, 26, 27, 30, 35,
@@ -1013,3 +1013,4 @@ cat("  Fig S6:  output/FigS6_Residuals.png\n")
 cat("  Fig S7:  output/FigS7_Contrast_Plot.png\n")
 cat(strrep("=", 70), "\n")
 # END OF SCRIPT
+
