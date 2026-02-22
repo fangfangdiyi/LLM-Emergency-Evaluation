@@ -28,7 +28,7 @@ We systematically evaluated six frontier LLMs—DeepSeek R1, Gemini 3 Pro, Claud
 ```
 ├── README.md                          # This file
 ├── LLM_Emergency_Analysis.R           # Main statistical analysis script (R 4.5.0)
-├── generate_supplementary_tables.py   # Supplementary Table S5 generation (Python 3)
+├── generate_supplementary_tables.py   # Supplementary Table S1 generation (Python 3)
 ├── verify_results.R                   # Verification checklist of expected values
 └── output/                            # Generated figures and tables (after running script)
     ├── LLM_Emergency_All_Results.xlsx # Comprehensive results (19 sheets)
