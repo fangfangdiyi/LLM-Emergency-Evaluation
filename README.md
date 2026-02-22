@@ -19,9 +19,9 @@ We systematically evaluated six frontier LLMs—DeepSeek R1, Gemini 3 Pro, Claud
 
 ### Key Findings
 
-- **Three-tier performance hierarchy** (F₅,₉₀₁ = 35.53, p < 0.001): Top tier (Gemini 3 Pro, DeepSeek R1), Middle tier (Claude Sonnet 4.5, GPT-5.1, Grok 4), Bottom tier (DeepSeek V3.1)
-- **Open-source parity**: DeepSeek R1 (EMM = 13.86) achieved statistical equivalence to Gemini 3 Pro (EMM = 13.93; Δ = 0.07, p = 0.999)
-- **Divergent safety profiles**: Overall failure rates ranged from 6.4% (Gemini 3 Pro) to 26.3% (DeepSeek V3.1), with a six-fold range in rare disease recognition failure rates
+- **Three-tier performance hierarchy** (F₅,₉₀₁ = 34.01, p < 0.001): Top tier (Gemini 3 Pro, DeepSeek R1), Middle tier (Claude Sonnet 4.5, GPT-5.1, Grok 4), Bottom tier (DeepSeek V3.1)
+- **Open-source parity**: DeepSeek R1 (EMM = 13.80) achieved statistical equivalence to Gemini 3 Pro (EMM = 13.89; Δ = 0.09, p = 0.998)
+- **Divergent safety profiles**: Overall failure rates ranged from 7.6% (Gemini 3 Pro and DeepSeek R1) to 30.4% (DeepSeek V3.1), with a six-fold range in rare disease recognition failure rates
 
 ## Repository Structure
 
@@ -57,7 +57,7 @@ The clinicians' evaluation dataset is not included in this repository. To obtain
 |-----------|------------------------------------------------|
 | rater     | Rater identifier (1 or 2)                      |
 | case_id   | Case number (1–54)                             |
-| round     | Query round (1–3, corresponding to Diagnosis, Next Steps, Treatment dimensions in the scoring) |
+| round     | Query round (1–3, each case was independently queried three times, ≥24 hours apart) |
 | model     | Model identifier (1–6; see mapping below)      |
 | diagnosis | Diagnosis score (1–5)                          |
 | nextstep  | Next-step recommendation score (1–5)           |
@@ -136,12 +136,12 @@ python generate_supplementary_tables.py
 | Manuscript Element | Script Section | Output File |
 |--------------------|----------------|-------------|
 | Inter-rater reliability | Section 3 | `FigS1`, `FigS2` |
-| Table 2 (EMMs, tiers) | Sections 6–7 | `Fig1`, `LLM_Emergency_All_Results.xlsx` |
+| Table 1 (EMMs, tiers) | Sections 6–7 | `Fig1`, `LLM_Emergency_All_Results.xlsx` |
 | Figure 1 (overall performance) | Section 7 | `Fig1_Overall_Performance.png` |
 | Figure 2 (round trajectory) | Section 8 | `Fig2_Round_Trajectory.png` |
-| Table 3 (difficulty decline) | Section 9 | `Fig3_Performance_by_Difficulty.png` |
+| Table 2 (difficulty decline) | Section 9 | `Fig3_Performance_by_Difficulty.png` |
 | Figure 3 (difficulty stratification) | Section 9 | `Fig3_Performance_by_Difficulty.png` |
-| Table 1 (error taxonomy) | Section 10 | `Fig4_Error_Rates_by_Type.png` |
+| Table 3 (error taxonomy) | Section 10 | `Fig4_Error_Rates_by_Type.png` |
 | Figure 4 (error rates) | Section 10 | `Fig4_Error_Rates_by_Type.png` |
 | Sensitivity analyses | Section 12 | `FigS7_Contrast_Plot.png` |
 
