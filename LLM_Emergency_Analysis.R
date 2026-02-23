@@ -768,7 +768,7 @@ cat("  Reference category: DeepSeek R1\n\n")
 data_consensus$model_name <- relevel(data_consensus$model_name, ref = "DeepSeek R1")
 data_consensus$total_ord  <- factor(round(data_consensus$total), ordered = TRUE)
 
-clmm_total <- clmm(total_ord ~ model_name + (1 | case_id), data = data_consensus)
+clmm_total <- clmm(total_ord ~ model_name + round + (1 | case_id), data = data_consensus)
 
 clmm_coef <- as.data.frame(summary(clmm_total)$coefficients)
 clmm_coef$Variable <- rownames(clmm_coef)
@@ -1013,4 +1013,5 @@ cat("  Fig S6:  output/FigS6_Residuals.png\n")
 cat("  Fig S7:  output/FigS7_Contrast_Plot.png\n")
 cat(strrep("=", 70), "\n")
 # END OF SCRIPT
+
 
