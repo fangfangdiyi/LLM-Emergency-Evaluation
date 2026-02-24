@@ -86,7 +86,7 @@ irr, rstatix, ggpubr, corrplot, performance,
 psych, car, writexl, ordinal, MuMIn, multcomp
 ```
 
-### Python (version 3.8+, for Supplementary Table S5 only)
+### Python (version 3.8+, for Supplementary Table S1 only)
 
 ```
 pandas, numpy, openpyxl
