@@ -1,5 +1,5 @@
 # ============================================================================
-# Beyond Accuracy: A Systematic Evaluation of Cognitive Biases Susceptibility and Safety 
+# Beyond Accuracy: A Systematic Evaluation of Cognitive Bias Susceptibility and Safety 
 # Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
 #
 # Statistical Analysis Script
@@ -1013,5 +1013,6 @@ cat("  Fig S6:  output/FigS6_Residuals.png\n")
 cat("  Fig S7:  output/FigS7_Contrast_Plot.png\n")
 cat(strrep("=", 70), "\n")
 # END OF SCRIPT
+
 
 
