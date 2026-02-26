@@ -1,4 +1,4 @@
-# Beyond Accuracy: A Systematic Evaluation of Cognitive Biases Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
+# Beyond Accuracy: A Systematic Evaluation of Cognitive Bias Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
 
 [![DOI](https://img.shields.io/badge/DOI-pending-blue)](https://doi.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +7,7 @@
 
 This repository contains the statistical analysis code and LLM response data for the manuscript:
 
-> **Beyond Accuracy: A Systematic Evaluation of Cognitive Biases Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine**
+> **Beyond Accuracy: A Systematic Evaluation of Cognitive Bias Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine**
 >
 > Liu F†, Liu Z†, Fei X, He J, Xing J, Li J\*, Chan P\*
 >
@@ -155,7 +155,7 @@ If you use this code or data, please cite:
 
 ```
 Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Beyond Accuracy: A Systematic 
-Evaluation of Cognitive Biases Susceptibility and Safety Profiles in Open-Source vs. Proprietary 
+Evaluation of Cognitive Bias Susceptibility and Safety Profiles in Open-Source vs. Proprietary 
 LLMs for Emergency Medicine. npj Digital Medicine (2026). [submitted]
 ```
 
