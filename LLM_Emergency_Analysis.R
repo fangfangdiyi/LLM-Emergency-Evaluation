@@ -1,5 +1,5 @@
 # ============================================================================
-# Beyond Accuracy: An Error Taxonomy Framework for Evaluating Cognitive Bias Susceptibility and Safety Profiles of Large Language Models in Emergency Medicine
+# Beyond Accuracy: A Systematic Evaluation of Cognitive Bias Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
 #
 # Statistical Analysis Script
 # R version 4.5.0
