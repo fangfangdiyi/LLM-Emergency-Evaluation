@@ -1,4 +1,4 @@
-# Beyond Accuracy: A Systematic Evaluation of Cognitive Bias Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
+# Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large Language Models for Decision Support at the Emergency–Critical Care Interface
 
 [![DOI](https://img.shields.io/badge/DOI-pending-blue)](https://doi.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -7,11 +7,11 @@
 
 This repository contains the statistical analysis code and LLM response data for the manuscript:
 
-> **Beyond Accuracy: An Error Taxonomy Framework for Evaluating Cognitive Bias Susceptibility and Safety Profiles of Large Language Models in Emergency Medicinee**
+> **Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large Language Models for Decision Support at the Emergency–Critical Care Interface**
 >
 > Liu F†, Liu Z†, Fei X, He J, Xing J, Li J\*, Chan P\*
 >
-> Submitted to *npj Digital Medicine*
+
 
 ## Study Summary
 
@@ -154,7 +154,7 @@ This study was approved by the Institutional Review Board (Protocol: XA-KS2024-0
 If you use this code or data, please cite:
 
 ```
-Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Beyond Accuracy: An Error Taxonomy Framework for Evaluating Cognitive Bias Susceptibility and Safety Profiles of Large Language Models in Emergency Medicine.  Lancet Digital Health (2026). [submitted]
+Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large Language Models for Decision Support at the Emergency–Critical Care Interface. Critical Care (2026). [submitted]
 ```
 
 ## License
