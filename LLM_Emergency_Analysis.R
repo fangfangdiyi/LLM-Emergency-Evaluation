@@ -1,5 +1,6 @@
 # ============================================================================
-# Beyond Accuracy: A Systematic Evaluation of Cognitive Bias Susceptibility and Safety Profiles in Open-Source vs. Proprietary LLMs for Emergency Medicine
+# Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large
+# Language Models for Decision Support at the Emergency-Critical Care Interface
 #
 # Statistical Analysis Script
 # R version 4.5.0
@@ -172,11 +173,8 @@ p_ba <- ggplot(data_wide, aes(x = total_mean, y = total_diff)) +
   annotate("text", x = max(data_wide$total_mean), y = ba_loa_lower,
            label = paste("-1.96SD =", round(ba_loa_lower, 2)),
            hjust = 1, vjust = 1.5, color = "red") +
-  labs(title = "Bland-Altman Plot: Inter-Rater Agreement",
-       subtitle = "Total Score (Rater 1 vs Rater 2)",
-       x = "Mean of Two Raters", y = "Difference (Rater 1 - Rater 2)") +
-  theme_pubr() +
-  theme(plot.title = element_text(face = "bold"))
+  labs(x = "Mean of Two Raters", y = "Difference (Rater 1 - Rater 2)") +
+  theme_pubr()
 
 ggsave("output/FigS2_BlandAltman.png", p_ba, width = 8, height = 6, dpi = 300)
 cat("  Saved: output/FigS2_BlandAltman.png\n")
@@ -213,9 +211,7 @@ png("output/FigS1_Correlation_Matrix.png", width = 600, height = 500, res = 150)
 corrplot(cor_matrix, method = "color", type = "upper",
          addCoef.col = "black", number.cex = 1.2,
          tl.col = "black", tl.srt = 45,
-         col = colorRampPalette(c("#0072B2", "white", "#D55E00"))(100),
-         title = "Correlation Between Scoring Dimensions",
-         mar = c(0, 0, 2, 0))
+         col = colorRampPalette(c("#0072B2", "white", "#D55E00"))(100))
 dev.off()
 cat("  Saved: output/FigS1_Correlation_Matrix.png\n")
 
@@ -278,7 +274,7 @@ lmm_full <- lmer(total ~ model_name * round + (1 | case_id),
                  data = data_consensus, REML = TRUE)
 
 anova_full <- anova(lmm_full, type = 3, ddf = "Kenward-Roger")
-cat("Type III ANOVA (Full Model with Interaction):\n")
+cat("Type III ANOVA (Full Model with Interction):\n")
 print(anova_full)
 
 interaction_p <- anova_full["model_name:round", "Pr(>F)"]
@@ -392,13 +388,10 @@ p_fig1 <- ggplot(emm_df, aes(x = reorder(model_name, emmean), y = emmean,
            hjust = 0, size = 3, color = "blue") +
   scale_fill_brewer(palette = "Set2") +
   coord_cartesian(ylim = c(10, 15)) +
-  labs(title = "Figure 1. Overall Performance Comparison Across LLMs",
-       subtitle = "Estimated Marginal Means with 95% CI",
-       x = "Model", y = "Total Score (3-15)") +
+  labs(x = "Model", y = "Total Score (3-15)") +
   theme_pubr() +
   theme(legend.position = "none",
-        axis.text.x = element_text(angle = 45, hjust = 1, size = 11),
-        plot.title = element_text(face = "bold", size = 14))
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 11))
 
 ggsave("output/Fig1_Overall_Performance.png", p_fig1, width = 10, height = 7, dpi = 300)
 ggsave("output/Fig1_Overall_Performance.pdf", p_fig1, width = 10, height = 7)
@@ -416,13 +409,11 @@ p_figS5 <- ggplot(cohens_d_df, aes(x = Model2, y = Model1, fill = Cohen_d)) +
   scale_fill_gradient2(low = "#0072B2", mid = "white", high = "#D55E00",
                        midpoint = 0, na.value = "gray90", limits = c(-1.5, 1.5),
                        name = "Cohen's d") +
-  labs(title = "Supplementary Figure S5. Effect Size Matrix (Cohen's d)",
-       x = "", y = "",
+  labs(x = "", y = "",
        caption = "|d| < 0.2: negligible; 0.2-0.5: small; 0.5-0.8: medium; > 0.8: large") +
   theme_pubr() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
-        axis.text.y = element_text(size = 9),
-        plot.title = element_text(face = "bold")) +
+        axis.text.y = element_text(size = 9)) +
   coord_fixed()
 
 ggsave("output/FigS5_Effect_Size_Heatmap.png", p_figS5, width = 9, height = 8, dpi = 300)
@@ -463,12 +454,9 @@ p_fig2 <- ggplot(round_trend, aes(x = round, y = mean_total,
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_total - se, ymax = mean_total + se), width = 0.1) +
   scale_color_brewer(palette = "Set2", name = "Model") +
-  labs(title = "Figure 2. Performance Trajectory Across Rounds",
-       subtitle = "Mean total scores with standard error bars",
-       x = "Round", y = "Mean Total Score") +
+  labs(x = "Round", y = "Mean Total Score") +
   theme_pubr() +
-  theme(legend.position = "right",
-        plot.title = element_text(face = "bold"))
+  theme(legend.position = "right")
 
 ggsave("output/Fig2_Round_Trajectory.png", p_fig2, width = 10, height = 6, dpi = 300)
 cat("  Saved: output/Fig2_Round_Trajectory.png\n")
@@ -530,9 +518,8 @@ p_fig3 <- ggplot(model_by_diff,
   geom_errorbar(aes(ymin = mean_total - se, ymax = mean_total + se),
                 position = position_dodge(0.8), width = 0.2) +
   scale_fill_brewer(palette = "Set2", name = "Model") +
-  labs(title = "Figure 3. Model Performance by Case Difficulty",
-       subtitle = "Cases stratified by overall mean score (tertiles)",
-       x = "Case Difficulty", y = "Mean Total Score") +
+  coord_cartesian(ylim = c(9, 15)) +
+  labs(x = "Case Difficulty", y = "Mean Total Score") +
   theme_pubr() +
   theme(legend.position = "right")
 
@@ -640,27 +627,31 @@ for (et in list(
 }
 
 # --- Figure 4: Error Taxonomy Visualization ---
+# Order models by overall failure rate (best -> worst), matching Table 3
+fig4_model_order <- c("Gemini 3 Pro", "DeepSeek R1", "Claude Sonnet 4.5",
+                      "GPT-5.1", "Grok 4", "DeepSeek V3.1")
+
 error_plot_data <- error_all_combined %>%
   mutate(error_type = factor(error_type,
-                             levels = c("Rare Disease", "Anchoring Bias", "Iatrogenic Risk")))
+                             levels = c("Rare Disease", "Anchoring Bias", "Iatrogenic Risk")),
+         model_name = factor(model_name, levels = fig4_model_order))
 
 p_fig4 <- ggplot(error_plot_data, aes(x = model_name, y = rate_pct, fill = error_type)) +
   geom_col(position = position_dodge(0.8), alpha = 0.8, width = 0.7) +
-  geom_text(aes(label = paste0(rate_pct, "%")),
-            position = position_dodge(0.8), vjust = -0.3, size = 3) +
+  geom_errorbar(aes(ymin = ci_lo, ymax = ci_hi),
+                position = position_dodge(0.8), width = 0.2, linewidth = 0.5) +
+  geom_text(aes(label = paste0(rate_pct, "%"), y = ci_hi),
+            position = position_dodge(0.8), vjust = -0.5, size = 3) +
   scale_fill_manual(
     values = c("Rare Disease" = "#E69F00",
                "Anchoring Bias" = "#56B4E9",
                "Iatrogenic Risk" = "#009E73"),
     name = "Error Type"
   ) +
-  labs(title = "Figure 4. Error Taxonomy: Failure Rates by Error Type and Model",
-       subtitle = "Failure defined as score <= 3 on any individual scoring dimension",
-       x = "Model", y = "Failure Rate (%)") +
+  labs(x = "Model", y = "Failure Rate (%)") +
   theme_pubr() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-        legend.position = "right",
-        plot.title = element_text(face = "bold"))
+        legend.position = "right")
 
 ggsave("output/Fig4_Error_Rates_by_Type.png", p_fig4, width = 12, height = 7, dpi = 300)
 cat("  Saved: output/Fig4_Error_Rates_by_Type.png\n")
@@ -701,8 +692,7 @@ p_figS4 <- ggplot(dim_summary, aes(x = model_name, y = emmean, fill = dimension)
                 position = position_dodge(0.8), width = 0.2) +
   facet_wrap(~ dimension, scales = "free_y") +
   scale_fill_brewer(palette = "Set1") +
-  labs(title = "Supplementary Figure S4. Performance by Evaluation Dimension",
-       x = "Model", y = "Score (1-5)") +
+  labs(x = "Model", y = "Score (1-5)") +
   theme_pubr() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
         legend.position = "none",
@@ -731,8 +721,7 @@ p_figS3 <- ggplot(data_long, aes(x = model_name, y = score, fill = model_name)) 
   scale_fill_brewer(palette = "Set2") +
   scale_y_continuous(breaks = 1:5, limits = c(0.8, 5.2)) +
   coord_cartesian(ylim = c(1, 5)) +
-  labs(title = "Supplementary Figure S3. Score Distribution by Model and Dimension",
-       x = "Model", y = "Score (1-5)") +
+  labs(x = "Model", y = "Score (1-5)") +
   theme_pubr() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
         legend.position = "none",
@@ -767,7 +756,7 @@ cat("  Reference category: DeepSeek R1\n\n")
 data_consensus$model_name <- relevel(data_consensus$model_name, ref = "DeepSeek R1")
 data_consensus$total_ord  <- factor(round(data_consensus$total), ordered = TRUE)
 
-clmm_total <- clmm(total_ord ~ model_name + round + (1 | case_id), data = data_consensus)
+clmm_total <- clmm(total_ord ~ model_name + (1 | case_id), data = data_consensus)
 
 clmm_coef <- as.data.frame(summary(clmm_total)$coefficients)
 clmm_coef$Variable <- rownames(clmm_coef)
@@ -811,12 +800,9 @@ p_figS7 <- ggplot(contrast_df, aes(x = estimate, y = reorder(model, estimate))) 
   geom_point(size = 4) +
   geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL), height = 0.2) +
   geom_text(aes(label = sig, x = upper.CL + 0.1), size = 5) +
-  labs(title = "Supplementary Figure S7. Pairwise Comparisons vs DeepSeek R1",
-       subtitle = "Mean difference with 95% CI",
-       x = "Difference in Total Score", y = "Model",
+  labs(x = "Difference in Total Score", y = "Model",
        caption = "Blue dashed lines: minimal clinically important difference (+/-1.5)") +
-  theme_pubr() +
-  theme(plot.title = element_text(face = "bold"))
+  theme_pubr()
 
 ggsave("output/FigS7_Contrast_Plot.png", p_figS7, width = 10, height = 6, dpi = 300)
 cat("  Saved: output/FigS7_Contrast_Plot.png\n")
@@ -1012,6 +998,3 @@ cat("  Fig S6:  output/FigS6_Residuals.png\n")
 cat("  Fig S7:  output/FigS7_Contrast_Plot.png\n")
 cat(strrep("=", 70), "\n")
 # END OF SCRIPT
-
-
-
