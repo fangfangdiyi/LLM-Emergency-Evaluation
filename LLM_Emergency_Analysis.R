@@ -1,7 +1,6 @@
 # ============================================================================
-# Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large
-# Language Models for Decision Support at the Emergency-Critical Care Interface
-#
+# Beyond Accuracy: A Multi-Dimensional Evaluation Framework for Safety Profiling  
+# of Large Language Models in High-Stakes Clinical Decision Support
 # Statistical Analysis Script
 # R version 4.5.0
 #
