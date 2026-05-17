@@ -1,4 +1,4 @@
-# Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large Language Models for Decision Support at the Emergency–Critical Care Interface
+# Beyond Accuracy: A Multi-Dimensional Evaluation Framework for Safety Profiling of Large Language Models in High-Stakes Clinical Decision Support
 
 [![DOI](https://img.shields.io/badge/DOI-pending-blue)](https://doi.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +7,7 @@
 
 This repository contains the statistical analysis code and LLM response data for the manuscript:
 
-> **Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large Language Models for Decision Support at the Emergency–Critical Care Interface**
+> **Beyond Accuracy: A Multi-Dimensional Evaluation Framework for Safety Profiling of Large Language Models in High-Stakes Clinical Decision Support**
 >
 > Liu F†, Liu Z†, Fei X, He J, Xing J, Li J\*, Chan P\*
 >
@@ -154,7 +154,7 @@ This study was approved by the Institutional Review Board (Protocol: XA-KS2024-0
 If you use this code or data, please cite:
 
 ```
-Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Beyond Accuracy: Error Taxonomy and Safety Profile Evaluation of Large Language Models for Decision Support at the Emergency–Critical Care Interface. Critical Care (2026). [submitted]
+Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Beyond Accuracy: A Multi-Dimensional Evaluation Framework for Safety Profiling of Large Language Models in High-Stakes Clinical Decision Support. Journal of Medical Systems (2026). [submitted]
 ```
 
 ## License
