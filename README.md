@@ -31,9 +31,9 @@ The central argument is that **mean accuracy is insufficient to characterise saf
 ```
 ├── README.md                          # This file
 ├── processed_ratings.xlsx             # De-identified rater scores (input data; see Data Description)
-├── analysis.R                         # Main statistical analysis script (R 4.5.0)
+├── LLM_Emergency_Analysis.R                         # Main statistical analysis script (R 4.5.0)
 ├── verify_results.R                   # Verification checklist of expected values
-└── output/                            # Created automatically when analysis.R runs
+└── output/                            # Created automatically when LLM_Emergency_Analysis.R runs
     ├── All_Results.xlsx                           # Comprehensive results (one sheet per analysis)
     ├── Fig1_Overall_Performance.png / .pdf        # Main Fig 1 — EMM tiers
     ├── Fig2_Reproducibility_violin.png / .pdf     # Main Fig 2 — within-case round-to-round SD
@@ -49,7 +49,7 @@ The central argument is that **mean accuracy is insufficient to characterise saf
     └── FigS8_Spaghetti_trajectories.png           # Supp Fig S8 — per-case round trajectories
 ```
 
-> **Script filename.** The canonical name in this repository is `analysis.R`. If your local copy uses a different filename (e.g. a dated revision suffix), rename it to match — or update the `source()` call below and the references in `verify_results.R`.
+> **Script filename.** The canonical name in this repository is `LLM_Emergency_Analysis.R`. If your local copy uses a different filename (e.g. a dated revision suffix), rename it to match — or update the `source()` call below and the references in `verify_results.R`.
 
 ## Data Description
 
@@ -94,12 +94,12 @@ Package versions used in the manuscript: `lme4` v1.1-37, `lmerTest` v3.1-3, `emm
 
 ## Usage
 
-1. Place `processed_ratings.xlsx` in the same directory as `analysis.R` (the file is provided in this repository).
+1. Place `processed_ratings.xlsx` in the same directory as `LLM_Emergency_Analysis.R` (the file is provided in this repository).
 2. Open R (version 4.5.0 recommended) and set your working directory to the repository root.
 3. Run:
 
 ```r
-source("analysis.R")
+source("LLM_Emergency_Analysis.R")
 ```
 
 The script creates the `output/` directory automatically, performs all statistical analyses reported in the manuscript, generates all main and supplementary figures in `output/`, and exports comprehensive results to `output/All_Results.xlsx`.
@@ -129,7 +129,7 @@ source("verify_results.R")
 
 Round (query repetition) is treated as an **exchangeable replicate**, not a fixed-effect trend; a sensitivity analysis adding round as a fixed effect confirms it is negligible (*F*₂,₆₄₆ = 0.59, *p* = 0.56).
 
-The Fisher–Freeman–Halton omnibus is computed in Section 8a-ter of `analysis.R` via `fisher.test(..., simulate.p.value = TRUE, B = 1e5)` on the 2 × 6 (dangerous vs safe) × model table using `set.seed(42)`. Because it is a Monte Carlo estimate, the reported *p* (≈ 0.009) carries small seed-dependent variation across R versions.
+The Fisher–Freeman–Halton omnibus is computed in Section 8a-ter of `LLM_Emergency_Analysis.R` via `fisher.test(..., simulate.p.value = TRUE, B = 1e5)` on the 2 × 6 (dangerous vs safe) × model table using `set.seed(42)`. Because it is a Monte Carlo estimate, the reported *p* (≈ 0.009) carries small seed-dependent variation across R versions.
 
 ## Manuscript–Code Correspondence
 
