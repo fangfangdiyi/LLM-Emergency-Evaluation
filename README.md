@@ -1,4 +1,4 @@
-# Mean Accuracy May Be Insufficient for Safety Profiling: A Single-Centre Proof-of-Concept Evaluation of Six Large Language Models on Challenging Diagnostic Cases
+# Development of a Framework for Evaluating Large Language Model Safety and Reliability: A Proof-of-Concept Evaluation
 
 [![DOI](https://img.shields.io/badge/DOI-pending-blue)](https://doi.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +7,7 @@
 
 This repository contains the statistical analysis code and the de-identified LLM response/scoring data for the manuscript:
 
-> **Mean Accuracy May Be Insufficient for Safety Profiling: A Single-Centre Proof-of-Concept Evaluation of Six Large Language Models on Challenging Diagnostic Cases**
+> **Development of a Framework for Evaluating Large Language Model Safety and Reliability: A Proof-of-Concept Evaluation**
 >
 > Liu F†, Liu Z†, Fei X, He J, Xing J, Li J\*, Chan P\*
 >
@@ -160,9 +160,7 @@ This study was approved by the Institutional Review Board of Xuanwu Hospital, Ca
 If you use this code or data, please cite:
 
 ```
-Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Mean Accuracy May Be Insufficient for Safety Profiling:
-A Single-Centre Proof-of-Concept Evaluation of Six Large Language Models on Challenging
-Diagnostic Cases. Journal of Medical Systems (2026). [under revision]
+Liu F, Liu Z, Fei X, He J, Xing J, Li J, Chan P. Development of a Framework for Evaluating Large Language Model Safety and Reliability: A Proof-of-Concept Evaluation. Journal of Medical Systems (2026). [under revision]
 ```
 
 ## License
