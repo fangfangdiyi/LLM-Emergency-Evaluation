@@ -1,7 +1,7 @@
 # ============================================================================
-# Mean Accuracy May Be Insufficient for Safety Profiling:
-#   A Single-Centre Proof-of-Concept Evaluation of Six Large Language Models
-#   on Challenging Diagnostic Cases — Journal of Medical Systems (revised submission)
+# Development of a Framework for Evaluating Large Language Model Safety and 
+# Reliability: A Proof-of-Concept Evaluation — Journal of Medical Systems
+# (revised submission)
 #
 # CONSOLIDATED ANALYSIS SCRIPT (reproduces every number, table and figure in
 # the revised manuscript and supplement).  R >= 4.5.0.
