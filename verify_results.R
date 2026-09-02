@@ -1,7 +1,7 @@
 # ============================================================================
 # Manuscript <-> Code Alignment Verification Checklist
 # Run AFTER analysis.R to confirm output matches the values reported in the
-# revised manuscript ("Mean Accuracy May Be Insufficient ...").
+# revised manuscript ("Development of a Framework for Evaluating LLM Safety and Reliability...").
 #
 # This file reflects the REVISED analysis:
 #   - Primary model:  Total ~ Model + (1|Case) + (1|Case:Model)
